@@ -1,4 +1,4 @@
-import { CONSTANTS } from '@src/utils/constants';
+import { CONSTANTS } from '@src/utils';
 import { Middleware, ExpressErrorMiddlewareInterface, HttpError } from 'routing-controllers';
 import { Service } from 'typedi';
 
