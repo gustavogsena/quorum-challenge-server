@@ -1,0 +1,1 @@
+export { default as GetLegislatorsDTO } from "./getLegislators.dto";
