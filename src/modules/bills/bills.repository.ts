@@ -1,4 +1,4 @@
-import { Service } from "typedi";
+import Container, { Service } from "typedi";
 import { DBClient } from "@src/utils/";
 import { Bill, Person, VoteType } from "@src/models";
 import { GetBillsDTO } from "./dtos";
@@ -15,7 +15,9 @@ type BillWithDetails = {
 
 @Service()
 export class BillsRepository {
-    constructor(private readonly client: DBClient) { }
+    constructor(private readonly client: DBClient) {
+        this.client = Container.get(DBClient)
+    }
 
     async getBills(params?: GetBillsDTO): Promise<BillWithDetails[]> {
         const bills = await this.client.bills();
@@ -47,7 +49,9 @@ export class BillsRepository {
             return data
         })
 
-        const result = reponse.slice(params?.offset, params?.limit)
+        const offset = params?.offset ?? 0
+        const limit = (params?.limit ?? 20) + offset;
+        const result = reponse.slice(offset, limit)
         return result;
     }
 

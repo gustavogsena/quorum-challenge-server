@@ -1,17 +1,18 @@
-import { Get, HttpCode, JsonController, Param, QueryParams } from "routing-controllers";
-import { Service } from "typedi";
+import { Get, HttpCode, JsonController, Param, QueryParam, QueryParams } from "routing-controllers";
+import Container, { Service } from "typedi";
 import { BillsService } from "./bills.service";
-import { GetBillsDTO } from "./dtos";
 import { CONSTANTS } from "@src/utils/";
 
 @Service()
 @JsonController('/bills')
 export class BillsController {
-    constructor(private readonly billsService: BillsService) { }
+    constructor(private readonly billsService: BillsService) {
+        this.billsService = Container.get(BillsService)
+    }
 
     @HttpCode(200)
     @Get('/')
-    async getBills(@QueryParams() { limit, offset }: GetBillsDTO) {
+    async getBills(@QueryParam('limit') limit: number, @QueryParam('offset') offset: number) {
         const billsResult = await this.billsService.getBills({ limit, offset })
 
         return {

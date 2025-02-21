@@ -1,11 +1,13 @@
-import { Service } from "typedi";
+import Container, { Service } from "typedi";
 import { DBClient } from "@src/utils";
 import { VoteType } from "@src/models";
 import { GetLegislatorsDTO } from "./dtos";
 
 @Service()
 export class LegislatorsRepository {
-    constructor(private readonly client: DBClient) { }
+    constructor(private readonly client: DBClient) {
+        this.client = Container.get(DBClient)
+    }
 
     async getLegislators(params?: GetLegislatorsDTO) {
         const legislators = await this.client.legislators();
@@ -46,8 +48,10 @@ export class LegislatorsRepository {
 
         })
 
-        const result = params ? reponse.slice(params?.offset ?? 0, params?.limit + params?.offset) : reponse;
-        return result
+        const offset = params?.offset ?? 0
+        const limit = (params?.limit ?? 20) + offset;
+        const result = reponse.slice(offset, limit);
+        return result;
     }
 
 

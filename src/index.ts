@@ -18,7 +18,7 @@ export const app = express()
 app.use(express.json())
 useExpressServer(app, {
     classTransformer: true,
-    validation: { whitelist: true, forbidNonWhitelisted: true, always: true },
+    validation: { whitelist: true},
     cors: true,
     controllers: [BillsController, LegislatorsController],
     middlewares: [HttpErrorHandler],
@@ -26,7 +26,6 @@ useExpressServer(app, {
 });
 
 let server: Server;
-app.set('trust proxy', 1)
 if (process.env.NODE_ENV !== 'test') {
     server = app.listen(port, host, () => {
         console.log(`Server started on ${host}:${port}`)

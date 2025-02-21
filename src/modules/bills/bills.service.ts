@@ -1,11 +1,13 @@
-import { Service } from "typedi"
+import Container, { Service } from "typedi"
 import { BillsRepository } from "./bills.repository"
 import { GetBillsDTO } from "./dtos"
 
 @Service()
 export class BillsService {
     constructor(private readonly billsRepository: BillsRepository
-    ) { }
+    ) {
+        this.billsRepository = Container.get(BillsRepository)
+    }
 
     async getBills(params?: GetBillsDTO) {
         const bills = await this.billsRepository.getBills(params);

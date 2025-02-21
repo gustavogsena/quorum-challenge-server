@@ -1,4 +1,4 @@
-import { Service } from "typedi";
+import Container, { Service } from "typedi";
 import CSVReader from "./CSVReader";
 import { CONSTANTS } from "./constants";
 import { Bill, Person, Vote, VoteResult } from "@src/models";
@@ -7,8 +7,9 @@ export type ModelType = Person | Bill | Vote | VoteResult;
 
 @Service()
 export class DBClient {
-    constructor(private readonly client: CSVReader) { }
-
+    constructor(private readonly client: CSVReader) {
+        this.client = Container.get(CSVReader)
+    }
 
     async bills(): Promise<Bill[]> {
         const bills = await this.client.csvToJSON<Bill>(CONSTANTS.paths.bills);

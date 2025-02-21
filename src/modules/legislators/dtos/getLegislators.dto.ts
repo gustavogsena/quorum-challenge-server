@@ -13,11 +13,11 @@ const MESSAGES = {
 export default class GetLegislatorsDTO {
     @IsOptional()
     @IsNumber({}, { message: MESSAGES.limit.invalid })
-    limit: number
+    limit?: number
 
     @IsOptional()
     @IsInt({ message: MESSAGES.offset.invalid })
-    offset: number
+    offset?: number
 
     constructor() {
         this.limit = 20;
