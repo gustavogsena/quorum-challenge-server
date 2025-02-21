@@ -48,8 +48,8 @@ export class LegislatorsRepository {
 
         })
 
-        const offset = params?.offset ?? 0
-        const limit = (params?.limit ?? 20) + offset;
+        const offset = Number(params?.offset) ?? 0
+        const limit = Number((params?.limit ?? 20)) + offset;
         const result = reponse.slice(offset, limit);
         return result;
     }
