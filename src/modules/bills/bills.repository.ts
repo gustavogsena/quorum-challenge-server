@@ -49,8 +49,8 @@ export class BillsRepository {
             return data
         })
 
-        const offset = Number(params?.offset) ?? 0
-        const limit = Number((params?.limit ?? 20)) + offset;
+        const offset = params?.offset && !!params.offset ? Number(params.offset) : 0
+        const limit = params?.limit && !!params.limit ? Number(params.limit) + offset : 20 + offset;
         const result = reponse.slice(offset, limit)
         return result;
     }
