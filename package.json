@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-csv",
+    "copy-csv": "ncp src/database dist/src/database",
+    "start": "node dist/src/index.js",
     "dev": "ts-node-dev --require tsconfig-paths/register --transpile-only ./src/index.ts",
     "test": "vitest --coverage"
   },
@@ -14,12 +16,16 @@
   "author": "Gustavo Sena",
   "license": "ISC",
   "description": "",
+  "_moduleAliases": {
+    "@src": "dist/src"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "@vitest/coverage-v8": "^3.0.6",
+    "ncp": "^2.0.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
@@ -35,6 +41,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "module-alias": "^2.2.3",
     "multer": "^1.4.5-lts.1",
     "papaparse": "^5.5.2",
     "reflect-metadata": "^0.2.2",
