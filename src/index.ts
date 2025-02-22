@@ -1,5 +1,6 @@
 import 'reflect-metadata'
-require('module-alias/register');
+// Uncomment the line below after building the project
+// require('module-alias/register');
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { useContainer, useExpressServer } from 'routing-controllers';
