@@ -4,7 +4,7 @@ import { AddressInfo } from 'net';
 import { expect, describe, it, beforeEach, vitest, afterAll, beforeAll } from "vitest";
 
 // Skip for get precise coverage on unit tests
-describe('API Users E2E Suite', () => {
+describe('API Users Integration Suite', () => {
     function waitForServerStatus(server: any) {
         return new Promise((resolve, reject) => {
             server.once('error', (err: any) => reject(err))
@@ -17,7 +17,7 @@ describe('API Users E2E Suite', () => {
         vitest.resetAllMocks();
     });
 
-    describe('E2E Tests for Server in a non-test environment', () => {
+    describe('Integration Tests for Server in a non-test environment', () => {
         it('should start server with PORT 4000', async () => {
             const PORT = 4000;
             const HOST = '0.0.0.0'
@@ -43,7 +43,7 @@ describe('API Users E2E Suite', () => {
         }, 10_000);
     });
 
-    describe('E2E Tests for Server', () => {
+    describe('Integration Tests for Server', () => {
         const DEFAULT_CONFIG = {
             limit: 1
         }
